@@ -6,6 +6,8 @@ window.$midi = undefined;
 
 class MidiCallback {
   values = {};
+  noteValues = {};
+
   targetValues = {};
   smoothTime = 0.05;
   setSmoothTime(t){
@@ -14,13 +16,17 @@ class MidiCallback {
   get(id){
     return this.values[id] || 0;
   }
+
+  getNote(id){
+    return this.noteValues[id] || 0;
+  }
   constructor(){
     let prev = performance.now();
     let anim = ()=>{
       let delta = ( (performance.now() - prev) / 1000);
       prev = performance.now();
       Object.keys(this.targetValues).forEach((key)=>{
-        damp(this.values,key,this.targetValues[key],this.smoothTime,delta)
+        damp(this.noteValues,key,this.targetValues[key],this.smoothTime,delta)
       })
       requestAnimationFrame(anim);  
     }
@@ -128,11 +134,11 @@ async function midi (){
           controllers[e.subtype]._span = controllers[e.subtype].querySelector('span');
         }
         controllers[e.subtype]._span.innerText = e.value;
-        if (e.subNote){
+        if (!e.isNote){
           window.$midi.values[e.subtype] = e.value;
         }else{
-          if (window.$midi.values[e.subtype] == undefined){
-            window.$midi.values[e.subtype] = 0;
+          if (window.$midi.noteValues[e.subtype] == undefined){
+            window.$midi.noteValues[e.subtype] = 0;
           }
           window.$midi.targetValues[e.subtype] = e.value;
         }
