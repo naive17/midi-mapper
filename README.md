@@ -21,3 +21,20 @@ get note value
 ```
 $midi.getNote(XX)
 ```
+
+## For developers
+
+To edit and recompile it node is required
+
+Install dependencies
+```
+npm install
+```
+Start development server
+```
+npm install
+```
+Build
+```
+npm build
+```
