@@ -14,11 +14,11 @@ class MidiCallback {
     this.smoothTime = t;
   }
   get(id){
-    return this.values[id] || 0;
+    return this.values['controller'+id] || 0;
   }
 
   getNote(id){
-    return this.noteValues[id] || 0;
+    return this.noteValues['note'+id] || 0;
   }
   constructor(){
     let prev = performance.now();
