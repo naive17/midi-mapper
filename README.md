@@ -4,7 +4,7 @@
 
 To load the script
 ```
--> await loadScript("https://midi-mapper-six.vercel.app/midi.umd.cjs")
+await loadScript("https://midi-mapper-six.vercel.app/midi.umd.cjs")
 ```
 
 setup smoothing for notes in seconds, it's the time to smooth notes from 0 to 1 and 0
